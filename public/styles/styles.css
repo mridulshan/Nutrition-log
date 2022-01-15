@@ -28,7 +28,22 @@ a{
     position: absolute; */
 }
 .btnclor{
-    background-color: #B3541E;
     color: #FFEDED;
+    border-color: #B3541E;
+    border-width: 1px;
+    border-radius:8px;
     
+}
+.btnclor:hover{
+    background-color: #B3541E;   
+    border-radius:8px;
+
+}
+.backDown{
+    position: absolute;
+    right: 35px;
+    top: 10px;
+    z-index: -1;
+
+
 }
