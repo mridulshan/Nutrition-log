@@ -1,10 +1,44 @@
 const express = require("express");
+const React = require("react");
+const ReactDom = require("react-dom");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const https = require('https');
 var arrFromSearch=1;
 var arrays=[];
-var obj;
+var obj={
+  total_hits: 0,
+  max_score: 0.00,
+  hits: [
+    {
+      _index: 0,
+      _type: 'nil',
+      _id: 'none',
+      _score: 0,
+      fields:{item_name:'enter item ..!.'}
+    },
+    {
+      _index: 0,
+      _type: 'nil',
+      _id: 'none',
+      _score: 0,
+      fields:{item_name:'enter item ..!.'}
+    },
+    {
+      _index: 0,
+      _type: 'nil',
+      _id: 'none',
+      _score: 0,
+      fields:{item_name:'enter item ..!.'}
+    },
+    {
+      _index: 0,
+      _type: 'nil',
+      _id: 'none',
+      _score: 0,
+      fields:{item_name:'enter item ..!.'}
+    },
+  ]};
 // const nutritionix = require("nutritionix-api");
 
 // const YOUR_APP_ID = "dc210fd5"; // Your APP ID
@@ -22,7 +56,14 @@ app.get("/", function (req, res) {
 
 app.get("/calories", function (req, res) {
   let arrayLen =arrays.length;
-  res.render("calories",{recievedFromApp:arrays,len:arrayLen});
+
+  if(obj==0){
+    res.render("calories",{recievedFromApp:arrays,len:arrayLen});
+  }else{
+    res.render("calories",{recievedFromApp:arrays,len:arrayLen,foodFromApi:obj});
+
+  }
+  
 });
 app.post("/calories", function (req, res) {
   var arrayLen =arrays.length;
@@ -31,16 +72,16 @@ app.post("/calories", function (req, res) {
   if(req.body.postFood!==''){
   arrays.push(arrFromSearch);
   };
-  console.log(arrays.length);
+  // console.log(arrays.length);
   const url ="https://api.nutritionix.com/v1_1/search/"+ req.body.postFood+"?results=0:20&fields=item_name,nf_total_fat,brand_name,item_id,nf_calories,nf_protein&appId=dc210fd5&appKey=135a6af303c7c5cde8026f549f61e283#";
     https.get(url, function (response) {
-    console.log(response.statusCode);
+    console.log("Response status code="+response.statusCode);
     response.on("data", function (data) {
        obj = JSON.parse(data);
       // for (let i = 0; i < obj.hits.length; i++) {
-      //   console.log(obj.hits[i].fields.item_name);
+      //   console.log(obj.hits[i].fields.item_name,obj.hits[i].fields.nf_serving_size_qty,obj.hits[i].fields.nf_protein,obj.hits[i].fields.nf_calories);
       // }
-      // console.log(obj.hits.length);
+      // console.log(obj.hits[i].fields.nf_serving_size_qty);
     });
   });
 
@@ -74,3 +115,6 @@ app.listen(process.env.PORT || 3000, function () {
     // })
   // })
 });
+
+
+

@@ -3,7 +3,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<% var recievedFromApp,len, recievedFromApi;%>
+<% var recievedFromApp,len, recievedFromApi,foodFromApi;%>
 
 <!-- <div>
     <h2>This is Caloies page.</h2>
@@ -12,7 +12,7 @@
     </p>
 </div> -->
 
-<!-- from bootstrap -->
+<!-- Calories starting -->
 
 <div class="container col-xxl-8 px-4 py-5">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -96,7 +96,7 @@
         <div class="input-group mb-3">
   <input type="text" class="form-control" placeholder="Search food..." name="postSearch" aria-label="Recipient's username" aria-describedby="basic-addon2">
   <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="post">Search</button>
+    <button class="btn btn-outline-secondary btnclor" type="post">Search</button>
   </div>
 </div>
       </div>
@@ -110,6 +110,8 @@
     This is a Preview please login
   </h2>
 </div>
+
+ <!-- Preview log -->
 <div class="d-flex justify-content-center">
   <a href="#previewLog">
   <svg class="svgspecial" height="100" width="100" fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -165,32 +167,91 @@
       <table class="table box">
         <thead>
           <tr >
-            <th scope="col" class="justify-content-center">Serial No.</th>
-            <th scope="col" class="justify-content-center">Food</th>
-            <th scope="col"class="justify-content-center">Serving size</th>
-            <th scope="col"class="justify-content-center">Calories</th>
+            <th scope="col" class="justify-content-center">Serial No:</th>
+            <th scope="col" class="justify-content-center">Food:</th>
+            <th scope="col"class="justify-content-center">Serving size:</th>
+            <th scope="col"class="justify-content-center">Item:</th>
           </tr>
         </thead>
         <tbody>
         
           <% for(var i=0;i<len;i++){ %>
           <tr>
-            <th scope="row"><%=i+1%></th>
+            <th scope="row"><%=i+1%>.</th>
             <td><%= recievedFromApp[i].postFood %> </td>
             <td><%= recievedFromApp[i].postServ %> </td>
-            <td></td>
+            <td >
+              <svg class="addMinus" style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+              </svg>
+             
+              <svg class="addMinus" style="width:24px;height:24px" viewBox="0 0 24 24" >
+                <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+              </svg></td>
           </tr>
-          <% }; %>
+          <% };  %>
           <tr>
             <th scope="row">
               <!-- <input type="text" class="form-control" title="enter s.no of food" name="postSno"> -->
-              <%= i+1%>
+              <%= i+1%>.  
             </th>
             <td>
-              <input type="text" class="form-control" title="Food" name="postFood">
+              <div class="">
+                <input data-bs-toggle="dropdown" type="search" class="form-control" title="Food" name="postFood" spellcheck="false"
+                  aria-autocomplete="none" autocomplete="none">
+                </input>
+                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-success rounded-circle" style="width: .5em; height: .5em;"></span>
+                      Action
+                    </a></li>
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-primary rounded-circle" style="width: .5em; height: .5em;"></span>
+                      Another action
+                    </a></li>
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-danger rounded-circle" style="width: .5em; height: .5em;"></span>
+                      Something else here
+                    </a></li>
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-info rounded-circle" style="width: .5em; height: .5em;"></span>
+                      Separated link
+                    </a></li>
+                </ul>
+              </div>
             </td>
             <td>
-              <input type="search" class="form-control" title="enter serving size of food" name="postServ">
+              <div class="">
+                <input data-bs-toggle="dropdown" type="search" class="form-control" title="enter serving size of food" name="postServ" spellcheck="false" aria-autocomplete="none" autocomplete="none">
+                </input>
+                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownMenuButton2">
+                    <% if(foodFromApi!==0){ %> 
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-success rounded-circle" style="width: .5em; height: .5em;"></span>
+                      <%= foodFromApi.hits[0].fields.item_name %>
+                    </a></li>
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-primary rounded-circle" style="width: .5em; height: .5em;"></span>
+                      <%= foodFromApi.hits[0].fields.item_name %>
+                    </a></li>
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-danger rounded-circle" style="width: .5em; height: .5em;"></span>
+                      <%= foodFromApi.hits[0].fields.item_name %>
+                    </a></li>
+                  <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                      <span class="d-inline-block bg-info rounded-circle" style="width: .5em; height: .5em;"></span>
+                      <%= foodFromApi.hits[0].fields.item_name %>
+                    </a></li>
+                    <% }else{ %>
+                      <li><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                        <span class="d-inline-block bg-secondary rounded-circle" style="width: .5em; height: .5em;"></span>
+                        Type something to search...
+                      </a></li>
+                    <% } %>
+
+
+                </ul>
+              </div>
 
             </td>
             <td>
@@ -220,17 +281,27 @@
         <thead>
           <tr >
             <th scope="col" class="justify-content-center">Suggestions: </th>
+            <td></td>
             
           </tr>
         </thead>
         <tbody>
          
       </table>
-
+      
       
     </div>
+
+    
   </div>
+  
 </div>
+<div id="root"></div>
+    <script src="../app.js" type="text"></script>
+
+
+
+
 
   
 <%- include("partials/footer"); %>
