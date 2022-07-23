@@ -1,0 +1,28 @@
+<%- include("partials/header"); %>
+
+<div class="p-5 mb-4  rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Login </h1>
+      <p class="col-md-8 fs-4">Login below to explore all of the good stuff. You can find all your Nurition and Exercise logs previously recorded by you. Keep Up!! 
+    </p>
+     
+        <br>
+
+        <div class="signin" >
+        <form action="/login" method="post">
+        <h2 class="mb-3">Login here</h2>
+
+            <div class="mb-3">
+              <input name="uName" type="text" class="input-group input-group-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" autocomplete="none">
+            </div>
+            <div class="mb-3">
+              <input name="uPass" type="password" class="input-group input-group-lg" id="exampleInputPassword1" placeholder="Enter password" autocomplete="none">
+            </div>
+            <button type="submit" class="btn btnclor">Login</button>
+          </form>
+         </div>
+    </div>
+  </div>
+
+
+     <%- include("partials/footer"); %>

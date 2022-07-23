@@ -3,6 +3,7 @@
     "body-parser": "^1.19.1",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
+    "mongoose": "^6.4.6",
     "nutritionix-api": "^1.0.4"
   },
   "name": "nutrition-log",

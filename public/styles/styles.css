@@ -17,8 +17,9 @@ a{
     background-color: #fff8f8;
 }
 .signin{
-    width: 280px;
+    width: 300px;
     margin:auto;
+    text-align: center;
    
     color: #FFCCD2;
     margin-top: 30px;
