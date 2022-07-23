@@ -80,3 +80,19 @@ a{
     color: #B3541E;
     padding: 0%;
 }
+.footr{
+    fill: #FFCCD2;
+    height: 29px;
+}
+a:hover{
+    color: #FFCCD2;    border-radius:8px;
+}
+footer{
+    height:100%;
+    margin: 0%;
+    padding: 1px;
+    border:0ch;
+}
+input{
+    width: 100px;
+}
