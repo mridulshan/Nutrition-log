@@ -1,14 +1,16 @@
 body{
     background-color: #362222;
     color: #FFEDED;
+    font-family: 'Times New Roman', Times, serif;
 
 }
 
 
 .nav{
-  background-color: #B3541E;
+  /* background-color: #B3541E; */
 }
 a{
+   
     text-decoration: none;
     color: #FFEDED;
 }
@@ -96,4 +98,11 @@ footer{
 }
 input{
     width: 100px;
+}
+
+.listBox{
+    background-color: #ffededd7;
+
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <!-- JavaScript Bundle with Popper -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition.ln</title>
+</head>
+<body class=" ">
+    <div class="d-flex  p-2">
+    
+        <div class=" flex-column flex-shrink-0   p-2 " style="position:relative;width: 206px;">
+            <a href="/" class="d-flex flex-row">
+                <svg class="svgspecial" xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="currentColor"
+                    class="bi bi-journal-plus" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
+                    <path
+                        d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                    <path
+                        d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                </svg>
+                <h1 class="d-flex flex-row fs-3 mb-2" href="#">Nutrition.ln</h1>
+            </a>
+    
+            <hr>
+            <ul class="nav nav-tabs flex-column mb-auto ml-0 ">
+                <li class="nav-item ml-0">
+                    <a href="#" class="nav-link link-light" aria-current="page">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-light">
+                        Calories
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-light">
+                        Exercises
+                    </a>
+                </li>
+                <!-- <li>
+                            <a href="#" class="nav-link link-light">
+                              Products
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class="nav-link link-light">
+                              Customers
+                            </a>
+                          </li> -->
+            </ul>
+    
+        </div>
+        <div class=" flex-fill p-4  text-white rounded">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 ">Nutrition Logs</h1>
+                <p class="lead my-2">Multiple entries can be saves to our database now so be ready to rock and log.</p>
+                <!-- <p class="lead my-2">Food Log</p> -->
+            </div>
+            <br>
+    
+            <div id="previewLog" class="my-1 p-3  rounded shadow-sm" style="width:95%">
+                <p class="border-bottom fs-4 mb-0 text-dark px-2">Your Food:</p>
+                <div class="progress">
+                    <div class="progress-bar bg-dark bg-opacity-75" role="progressbar" aria-label="Basic example"
+                        style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br>
+    
+                <div class=" d-flex">
+                    <div class="listBox flex-fill text-muted p-2 my-2" style="width:100%;">
+                        <div class="d-flex">
+                            <input class="form-check-input me-3 m-2" type="checkbox" name="" id=""
+                                style="width: 22px; height: 22px;">
+                            <p class=" mb-0 small lh-sm border-bottom">
+                                <strong class="d-block text-dark">Apple</strong>
+                                Calories: 200kcal Servings Size: One
+                            </p>
+                        </div>
+    
+                    </div>
+                    <div class="listBox flex-fill  text-dark p-2 m-2" style="width: 80px;">
+                        <p class="m-auto text-left fs-italic">
+                            +1000
+                        </p>
+                    </div>
+                </div>
+                <div class=" d-flex">
+                    <div class="listBox flex-fill text-muted p-2 my-2" style="width:100%;">
+                        <div class="d-flex">
+                            <input class="form-check-input me-3 m-2" type="checkbox" name="" id=""
+                                style="width: 22px; height: 22px;">
+                            <p class=" mb-0 small lh-sm border-bottom">
+                                <strong class="d-block text-dark">Banana</strong>
+                                Calories: 200kcal Servings Size: 20
+                            </p>
+                        </div>
+    
+                    </div>
+                    <div class="listBox flex-fill  text-dark p-2 m-2" style="width: 80px;">
+                        <p class="m-auto text-left fs-italic">
+                            +1000
+                        </p>
+                    </div>
+                </div>
+                <div class=" d-flex">
+                    <div class="listBox flex-fill text-muted p-2 my-2" style="width:100%;">
+                        <div class="d-flex">
+                            <input class="form-check-input me-3 m-2" type="checkbox" name="" id=""
+                                style="width: 22px; height: 22px;">
+                            <p class=" mb-0 small lh-sm border-bottom">
+                                <strong class="d-block text-dark">Apple</strong>
+                                Calories: 200kcal Servings Size: One
+                            </p>
+                        </div>
+    
+                    </div>
+                    <div class="listBox flex-fill  text-dark p-2 m-2" style="width: 80px;">
+                        <p class="m-auto text-left fs-italic">
+                            +1000
+                        </p>
+                    </div>
+                </div>
+    
+                <div class=" fs-5 flex-fill text-dark p-3 my-3" style=">
+                                        
+                                                      <p class=" mb-0 small lh-sm border-bottom">
+                    <strong class="d-block text-gray-dark">Total</strong>
+    
+                    Calories: 5000kcal &emsp14; Protein: 100g&emsp13; Fat: 80g &emsp13; Carbs: 200g
+                    </p>
+                </div>
+                <!-- <div class="listBox d-flex text-muted p-3 my-3">
+                                                              <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                                        
+                                                      <p class=" mb-0 small lh-sm border-bottom">
+                                                        <strong class="d-block text-gray-dark">@username</strong>
+                                                        Some representative placeholder content, with some information about this user. Imagine this being some sort of status update, perhaps?
+                                                      </p>
+                                                    </div> -->
+                <!-- <div class="listBox d-flex text-muted p-3 ">
+                                                              <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                                        
+                                                      <p class=" mb-0 small lh-sm border-bottom">
+                                                        <strong class="d-block text-gray-dark">@username</strong>
+                                                        Some representative placeholder content, with some information about this user. Imagine this being some sort of status update, perhaps?
+                                                      </p>
+                                                    </div> -->
+                <!-- <div class="d-flex text-muted pt-3">
+                                                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                                                
+                                                      <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                                        <strong class="d-block text-gray-dark">@username</strong>
+                                                        Some more representative placeholder content, related to this other user. Another status update, perhaps.
+                                                      </p>
+                                                    </div>
+                                                    <div class="d-flex text-muted pt-3">
+                                                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
+                                                
+                                                      <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                                        <strong class="d-block text-gray-dark">@username</strong>
+                                                        This user also gets some representative placeholder content. Maybe they did something interesting, and you really want to highlight this in the recent updates.
+                                                      </p>
+                                                    </div> -->
+    
+            </div>
+    
+        </div>
+    
+    
+    </div>
+    <hr>
+    <footer class="d-flex flex-column flex-shrink-0">
+        <div class="nav d-flex flex-column dropdown">
+            <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle show"
+                id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>MridulShan</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow " aria-labelledby="dropdownUser2"
+                style="position: absolute; inset: auto auto 0px 0px; margin-top: auto; transform: translate(0px, -34px);"
+                data-popper-placement="top-start">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+        </div>
+    
+    </footer>
+</body>
+</html>

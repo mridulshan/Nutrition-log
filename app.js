@@ -11,7 +11,9 @@ var arrays=[];
 
 //mongodb update
 const mongoose = require('mongoose');
+const { prependListener } = require("process");
 mongoose.connect('mongodb://localhost:27017/peopleDb');
+//user
 const userSchema = new mongoose.Schema({
   name: {
       type:String,
@@ -28,7 +30,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 const Person = mongoose.model("Person",userSchema);
-
+//food related to user
 const nutritionSchema = new mongoose.Schema({
    user: {
     type: userSchema,
@@ -47,6 +49,7 @@ const nutritionSchema = new mongoose.Schema({
     required:true,
    }
 });
+const Food = mongoose.model("Food",nutritionSchema);
 
 
 
@@ -86,6 +89,21 @@ app.post("/calories", function (req, res){
   //   });
   // });
     res.redirect("/calories#previewLog");
+});
+
+app.get("/calories/:uname",function(req,res){
+    console.log(req.params.uname);
+    Person.find({userName: req.params.uname},function(err,person){
+    if(err){
+        console.log(err);
+    }else{
+      // person.forEach(element => {
+      //             console.log(element.name);
+      //         });
+      res.render("profile");
+    }
+  });
+  // res.redirect("/");
 });
 
 
@@ -133,8 +151,8 @@ app.post("/signup",function(req,res){
 });
 
 app.get("/:uId",function(req,res){
-    console.log(req.params);
-    res.redirect("/login");
+    // console.log(req.params);
+    res.redirect("/calories/"+req.params.uId);
 });
 
 
