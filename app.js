@@ -7,6 +7,8 @@ const https = require('https');
 var arrFromSearch=1;
 var arrays=[];
 
+
+
 //mongodb update
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/peopleDb');
@@ -27,21 +29,25 @@ const userSchema = new mongoose.Schema({
 });
 const Person = mongoose.model("Person",userSchema);
 
-// const nutritionSchema = new mongoose.Schema({
-//    user: Person,
-//    food:{
-//     type:String,
-//     required:true,
-//    },
-//    serving:{
-//     type:Number,
-//     required:true,
-//    },
-//    calorie:{
-//     type:Number,
-//     required:true,
-//    }
-// });
+const nutritionSchema = new mongoose.Schema({
+   user: {
+    type: userSchema,
+    required: true
+   },
+   food:{
+    type:String,
+    required:true,
+   },
+   serving:{
+    type:Number,
+    required:true,
+   },
+   calorie:{
+    type:Number,
+    required:true,
+   }
+});
+
 
 
 const app = express();
@@ -102,13 +108,15 @@ app.post("/login",function(req,res){
       else{
         if(persons.length>0){
             console.log("This will be taken to new Page!")
+            res.redirect("/"+testName);
         }else{
           console.log("No user found");
+          res.redirect("/");
         }
       }
   });
  
-  res.redirect("/login");
+  
 });
 
 app.post("/signup",function(req,res){  
@@ -120,17 +128,13 @@ app.post("/signup",function(req,res){
   });
   person.save();
 
-  //to see database of users 
-
-  // Person.find(function(err,persons){
-  //   if(err)
-  //        console.log(err);
-  //   else
-  //       persons.forEach(element => {
-  //           console.log(element.name);
-  //       });
-  // });
+  
   res.redirect("/");
+});
+
+app.get("/:uId",function(req,res){
+    console.log(req.params);
+    res.redirect("/login");
 });
 
 
@@ -141,3 +145,13 @@ app.listen(process.env.PORT || 3000, function () {
 
 
 
+//to see database of users 
+
+  // Person.find(function(err,persons){
+  //   if(err)
+  //        console.log(err);
+  //   else
+  //       persons.forEach(element => {
+  //           console.log(element.name);
+  //       });
+  // });
