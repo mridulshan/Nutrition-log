@@ -1,9 +1,5 @@
 <!-- Header using ejs -->
 <%- include("partials/header"); %>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 <!-- <div>
     <h2>This is Caloies page.</h2>
     <p>
@@ -182,9 +178,13 @@
             <td><%= recievedFromApp[i].postServ %> </td>
             <td><%= recievedFromApp[i].postCal %> </td>
             <td >
-            <svg class="addMinus" style="width:24px;height:24px" viewBox="0 0 24 24" >
+              <form action="/calories" method="post">
+                <button type="submit" class="addMinus" name="svg" value="<%= i+1 %>"  ><svg class="addMinus" style="width:24px;height:24px" viewBox="0 0 24 24" >
                 <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-              </svg></td>
+              </svg></button>
+                
+              </form>
+            </td>
           </tr>
           <% };  %>
           <tr>

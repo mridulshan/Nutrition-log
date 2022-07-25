@@ -31,6 +31,7 @@ a{
     position: absolute; */
 }
 .btnclor{
+    width: 90%;
     color: #FFEDED;
     border-color: #B3541E;
     border-width: 1px;
@@ -39,6 +40,19 @@ a{
 }
 .btnclor:hover{
     background-color: #B3541E;   
+    border-radius:8px;
+
+}
+.textPut{
+    width: 90%;
+    color: #000000;
+    border-color: #B3541E;
+    border-width: 1px;
+    border-radius:8px;
+    
+}
+.textPut:hover{
+  
     border-radius:8px;
 
 }

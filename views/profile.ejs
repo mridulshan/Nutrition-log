@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,80 +65,104 @@
         <div class=" flex-fill p-4  text-white rounded">
             <div class="col-md-6 px-0">
                 <h1 class="display-4 ">Nutrition Logs</h1>
-                <p class="lead my-2">Multiple entries can be saves to our database now so be ready to rock and log.</p>
+                <p class="lead my-2">Hi <%=dataObj.name%> , Multiple entries can be saves to our database now so be ready to rock and log.</p>
                 <!-- <p class="lead my-2">Food Log</p> -->
             </div>
             <br>
     
             <div id="previewLog" class="my-1 p-3  rounded shadow-sm" style="width:95%">
                 <p class="border-bottom fs-4 mb-0 text-dark px-2">Your Food:</p>
-                <div class="progress">
-                    <div class="progress-bar bg-dark bg-opacity-75" role="progressbar" aria-label="Basic example"
-                        style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+               <% var total=0;%> 
                 <br>
-    
+                
+                <% for(var i=0;i<passedNPlen;i++){ %>
+                   <form action="<%= temp +'/delete' %>" method="post">   
                 <div class=" d-flex">
                     <div class="listBox flex-fill text-muted p-2 my-2" style="width:100%;">
                         <div class="d-flex">
-                            <input class="form-check-input me-3 m-2" type="checkbox" name="" id=""
+                            <input class="form-check-input me-3 m-2" onchange="this.form.submit()" type="checkbox" name="delete" value="<%= passednutritionProfile[i]._id %>" 
                                 style="width: 22px; height: 22px;">
                             <p class=" mb-0 small lh-sm border-bottom">
-                                <strong class="d-block text-dark">Apple</strong>
-                                Calories: 200kcal Servings Size: One
+                                <strong class="d-block text-dark">
+                                    <%= passednutritionProfile[i].food%>
+                                </strong>
+                                Calories: <%= passednutritionProfile[i].calorie %>kcal Servings Size: <%= passednutritionProfile[i].serving %>
                             </p>
+
+                           
                         </div>
-    
-                    </div>
-                    <div class="listBox flex-fill  text-dark p-2 m-2" style="width: 80px;">
-                        <p class="m-auto text-left fs-italic">
-                            +1000
+                        </div>
+                        
+                    <div class="listBox flex-fill   text-dark p-2 m-2 align-middle align-items-centers" style="width: 80px;">
+                        <p class="m-auto text-left fs-italic align-middle">
+                            <strong class="d-block text-gray-dark">+<%= (passednutritionProfile[i].calorie*passednutritionProfile[i].serving) %></strong>
                         </p>
                     </div>
                 </div>
+                </form>
+
+
+                <% total=total+(passednutritionProfile[i].calorie*passednutritionProfile[i].serving); %>
+                <% }; %>
+
                 <div class=" d-flex">
                     <div class="listBox flex-fill text-muted p-2 my-2" style="width:100%;">
                         <div class="d-flex">
-                            <input class="form-check-input me-3 m-2" type="checkbox" name="" id=""
-                                style="width: 22px; height: 22px;">
-                            <p class=" mb-0 small lh-sm border-bottom">
-                                <strong class="d-block text-dark">Banana</strong>
-                                Calories: 200kcal Servings Size: 20
-                            </p>
+                            <!-- <input class="form-check-input me-3 m-2" type="checkbox" name="" id="" style="width: 22px; height: 22px;"> -->
+                            <div class=" mb-0 small lh-sm border-bottom">
+                                <strong class="flex-fill text-dark"></strong>
+                                <div class="d-flex ">
+                                    <td>
+                                        <div class="container">
+                                            <% var temp= "/calories/"+ dataObj.userName;%>
+                                            <form action="<%= temp %>" method="post">
+                                                <div class="row input-group mb-2 me-1 align-items-center">
+                                                    <div class="col p-1">
+                                                        <input type="search" class="  textPut p-1 " name="addFood"
+                                                            aria-describedby="emailHelp" placeholder="Food" autocomplete="none">
+                                                    </div>
+                                                    <div class="col p-1">
+                                                        <input  type="search" class="p-1 textPut" name="addServing"
+                                                            aria-describedby="emailHelp" placeholder="Servings " autocomplete="none">
+                        
+                                                    </div>
+                                                    <div class=" col p-1">
+                                                        <input name="addCalorie" type="search" class=" p-1 textPut"
+                                                            aria-describedby="emailHelp" placeholder="Calories" autocomplete="none">
+                        
+                                                    </div>
+                                                    <div class="col p-1">
+                                                        <button class="btnclor btn btn-sm text-dark" type="submit"
+                                                        id="button-addon2">Add New</button>
+                                                    </div>
+                                                    
+                                                </div>
+                                        </form>
+                                        </div>
+                
+                
+                                    </td>
+                
+                                </div>
+                            </div>
                         </div>
-    
-                    </div>
-                    <div class="listBox flex-fill  text-dark p-2 m-2" style="width: 80px;">
-                        <p class="m-auto text-left fs-italic">
-                            +1000
-                        </p>
+                
                     </div>
                 </div>
-                <div class=" d-flex">
-                    <div class="listBox flex-fill text-muted p-2 my-2" style="width:100%;">
-                        <div class="d-flex">
-                            <input class="form-check-input me-3 m-2" type="checkbox" name="" id=""
-                                style="width: 22px; height: 22px;">
-                            <p class=" mb-0 small lh-sm border-bottom">
-                                <strong class="d-block text-dark">Apple</strong>
-                                Calories: 200kcal Servings Size: One
-                            </p>
+                
+    
+                <div class=" fs-5 flex-fill text-dark p-3 my-3">
+                
+                    <p class=" mb-0 small lh-sm border-bottom">
+                        <strong class="d-block text-gray-dark">Total</strong>
+                
+                        Calories: (<%= total%>kcal out of 3200kcal) &emsp14; Protein: 100g&emsp13; Fat: 80g &emsp13; Carbs: 200g
+                        <div class="progress">
+                    
+                            <%var bar=total/32 %>
+                            <div class="progress-bar bg-dark bg-opacity-75" role="progressbar" aria-label="Basic example"
+                                style="width: <%= bar%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-    
-                    </div>
-                    <div class="listBox flex-fill  text-dark p-2 m-2" style="width: 80px;">
-                        <p class="m-auto text-left fs-italic">
-                            +1000
-                        </p>
-                    </div>
-                </div>
-    
-                <div class=" fs-5 flex-fill text-dark p-3 my-3" style=">
-                                        
-                                                      <p class=" mb-0 small lh-sm border-bottom">
-                    <strong class="d-block text-gray-dark">Total</strong>
-    
-                    Calories: 5000kcal &emsp14; Protein: 100g&emsp13; Fat: 80g &emsp13; Carbs: 200g
                     </p>
                 </div>
                 <!-- <div class="listBox d-flex text-muted p-3 my-3">
@@ -184,19 +209,20 @@
         <div class="nav d-flex flex-column dropdown">
             <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle show"
                 id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>MridulShan</strong>
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>
+                    <%= personObjname %>
+
+                </strong>
             </a>
             <ul class="dropdown-menu text-small shadow " aria-labelledby="dropdownUser2"
                 style="position: absolute; inset: auto auto 0px 0px; margin-top: auto; transform: translate(0px, -34px);"
                 data-popper-placement="top-start">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="/">New Signup</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><a class="dropdown-item" href="/login">Sign out</a></li>
             </ul>
         </div>
     

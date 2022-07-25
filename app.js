@@ -4,15 +4,20 @@ const ReactDom = require("react-dom");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const https = require('https');
-var arrFromSearch=1;
+var arrFromSearch;
 var arrays=[];
+var pArray=[];
+var mainProfile={
 
+};
+var nutritionProfile=[];
 
 
 //mongodb update
 const mongoose = require('mongoose');
 const { prependListener } = require("process");
-mongoose.connect('mongodb://localhost:27017/peopleDb');
+const { parentPort } = require("worker_threads");
+mongoose.connect('mongodb+srv://admin-mridul:013611sc@cluster0.j9ukryr.mongodb.net/peopleDb');
 //user
 const userSchema = new mongoose.Schema({
   name: {
@@ -71,7 +76,7 @@ app.get("/calories", function (req, res) {
 app.post("/calories", function (req, res){
   var arrayLen =arrays.length;
   arrFromSearch=req.body;
-  if(req.body.postFood!==''){
+  if(req.body.postFood){
   arrays.push(arrFromSearch);
   };
   // console.log(arrays.length);
@@ -88,22 +93,87 @@ app.post("/calories", function (req, res){
   //     // console.log(obj.hits[i].fields.nf_serving_size_qty);
   //   });
   // });
+  if(req.body.svg){
+    for(var i=req.body.svg-1;i<arrayLen-1;i++){
+      arrays[i]=arrays[i+1];
+    }
+    arrays.pop();   
+  }
+
+  console.log(req.body);
     res.redirect("/calories#previewLog");
 });
+// app.post("/calories/delete", function (req, res){
+//   console.log("");
+//     res.redirect("/calories#previewLog");
+// });
+
 
 app.get("/calories/:uname",function(req,res){
+  var pnPlen=0;
+  Food.find(function(err,food){
+    if(err){
+      console.log(err);
+    }else{
+      nutritionProfile=food;
+      pnPlen=nutritionProfile.length;
+  
+      // console.log(nutritionProfile);
+    }
+  });
     console.log(req.params.uname);
     Person.find({userName: req.params.uname},function(err,person){
     if(err){
         console.log(err);
     }else{
-      // person.forEach(element => {
-      //             console.log(element.name);
-      //         });
-      res.render("profile");
+      person.forEach(element => {
+                  pArray.push(element);
+                  // console.log(pArray);
+                });
+                mainProfile=pArray[0];
+                setTimeout(function(){
+
+
+                }, 1500); 
+      res.render("profile",{
+        personObjname:req.params.uname, 
+        dataObj:pArray[0],
+        passednutritionProfile:nutritionProfile,
+        passedNPlen:pnPlen
+      });
     }
   });
   // res.redirect("/");
+});
+app.post("/calories/:unamed/delete",function(req,res){
+  const checkedId=req.body.delete;
+  Food.findByIdAndRemove(checkedId,function(err){
+    if(!err){
+      console.log("Sucessfully deleted checked");
+      res.redirect("/calories/"+mainProfile.userName);
+    }
+  });
+
+});
+app.post("/calories/:unamep",function(req,res){
+  // console.log(mainProfile);
+  const food = new Food({
+    user: mainProfile,
+    food: req.body.addFood,
+    serving: req.body.addServing,
+    calorie: req.body.addCalorie,
+});
+food.save(function(err,result){
+  if (err){
+      console.log(err);
+  }
+  else{
+    res.redirect("/calories/"+req.params.unamep);
+      // console.log(result)
+  }
+});  // console.log(req.body);
+
+  
 });
 
 
@@ -145,7 +215,7 @@ app.post("/signup",function(req,res){
       password: req.body.uPass,
   });
   person.save();
-
+  
   
   res.redirect("/");
 });
