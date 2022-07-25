@@ -1,6 +1,4 @@
 const express = require("express");
-const React = require("react");
-const ReactDom = require("react-dom");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const https = require('https');
