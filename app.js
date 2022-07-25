@@ -129,10 +129,7 @@ app.get("/calories/:uname",function(req,res){
                   // console.log(pArray);
                 });
                 mainProfile=pArray[0];
-                setTimeout(function(){
-
-
-                }, 1500); 
+                
       res.render("profile",{
         personObjname:req.params.uname, 
         dataObj:pArray[0],
