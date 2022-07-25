@@ -9,7 +9,7 @@ var mainProfile={
 
 };
 var nutritionProfile=[];
-
+var pnPlen=0;
 
 //mongodb update
 const mongoose = require('mongoose');
@@ -54,7 +54,16 @@ const nutritionSchema = new mongoose.Schema({
 });
 const Food = mongoose.model("Food",nutritionSchema);
 
+Food.find(function(err,food){
+  if(err){
+    console.log(err);
+  }else{
+    nutritionProfile=food;
+    pnPlen=nutritionProfile.length;
 
+    // console.log(nutritionProfile);
+  }
+});
 
 const app = express();
 app.set("view engine", "ejs");
@@ -108,7 +117,7 @@ app.post("/calories", function (req, res){
 
 
 app.get("/calories/:uname",function(req,res){
-  var pnPlen=0;
+  
   Food.find(function(err,food){
     if(err){
       console.log(err);
@@ -147,6 +156,16 @@ app.post("/calories/:unamed/delete",function(req,res){
       console.log("Sucessfully deleted checked");
       res.redirect("/calories/"+mainProfile.userName);
     }
+    Food.find(function(err,food){
+      if(err){
+        console.log(err);
+      }else{
+        nutritionProfile=food;
+        pnPlen=nutritionProfile.length;
+    
+        // console.log(nutritionProfile);
+      }
+    });
   });
 
 });
@@ -167,7 +186,16 @@ food.save(function(err,result){
       // console.log(result)
   }
 });  // console.log(req.body);
+Food.find(function(err,food){
+  if(err){
+    console.log(err);
+  }else{
+    nutritionProfile=food;
+    pnPlen=nutritionProfile.length;
 
+    // console.log(nutritionProfile);
+  }
+});
   
 });
 
