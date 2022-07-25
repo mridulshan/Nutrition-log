@@ -212,7 +212,7 @@ app.post("/signup",function(req,res){
   person.save();
   
   
-  res.redirect("/");
+  res.redirect("/login");
 });
 
 app.get("/:uId",function(req,res){
