@@ -34,13 +34,9 @@
     
             <hr>
             <ul class="nav nav-tabs flex-column mb-auto ml-0 ">
-                <li class="nav-item ml-0">
-                    <a href="#" class="nav-link link-light" aria-current="page">
-                        Home
-                    </a>
-                </li>
+               
                 <li>
-                    <a href="#" class="nav-link link-light">
+                    <a href="/calories/<%=dataObj.userName%> %>" class="nav-link link-light">
                         Calories
                     </a>
                 </li>
@@ -207,11 +203,10 @@
     <hr>
     <footer class="d-flex flex-column flex-shrink-0">
         <div class="nav d-flex flex-column dropdown">
-            <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle show"
-                id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <a  class="secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>
-                    <%= personObjname %>
+                    <%= dataObj.name %>
 
                 </strong>
             </a>
@@ -224,8 +219,9 @@
                 </li>
                 <li><a class="dropdown-item" href="/login">Sign out</a></li>
             </ul>
+            
         </div>
-    
+        
     </footer>
 </body>
 </html>

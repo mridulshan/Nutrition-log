@@ -54,16 +54,7 @@ const nutritionSchema = new mongoose.Schema({
 });
 const Food = mongoose.model("Food",nutritionSchema);
 
-Food.find(function(err,food){
-  if(err){
-    console.log(err);
-  }else{
-    nutritionProfile=food;
-    pnPlen=nutritionProfile.length;
 
-    // console.log(nutritionProfile);
-  }
-});
 
 const app = express();
 app.set("view engine", "ejs");
@@ -77,7 +68,7 @@ app.get("/", function (req, res) {
 app.get("/calories", function (req, res) {
   let arrayLen =arrays.length;
     res.render("calories",{recievedFromApp:arrays,len:arrayLen});
-    console.log();
+    
 });
 
 app.post("/calories", function (req, res){
@@ -110,43 +101,28 @@ app.post("/calories", function (req, res){
   console.log(req.body);
     res.redirect("/calories#previewLog");
 });
-// app.post("/calories/delete", function (req, res){
-//   console.log("");
-//     res.redirect("/calories#previewLog");
-// });
 
 
 app.get("/calories/:uname",function(req,res){
   
-  Food.find(function(err,food){
+  Food.find({"user.userName":req.params.uname},function(err,food){
     if(err){
       console.log(err);
     }else{
       nutritionProfile=food;
+      if(food.length>0)
+      mainProfile=food[0].user;
+      
       pnPlen=nutritionProfile.length;
-  
-      // console.log(nutritionProfile);
-    }
-  });
-    console.log(req.params.uname);
-    Person.find({userName: req.params.uname},function(err,person){
-    if(err){
-        console.log(err);
-    }else{
-      person.forEach(element => {
-                  pArray.push(element);
-                  // console.log(pArray);
-                });
-                mainProfile=pArray[0];
-                
       res.render("profile",{
-        personObjname:req.params.uname, 
-        dataObj:pArray[0],
+        dataObj:mainProfile,
         passednutritionProfile:nutritionProfile,
         passedNPlen:pnPlen
       });
     }
   });
+
+    
   // res.redirect("/");
 });
 app.post("/calories/:unamed/delete",function(req,res){
@@ -156,7 +132,7 @@ app.post("/calories/:unamed/delete",function(req,res){
       console.log("Sucessfully deleted checked");
       res.redirect("/calories/"+mainProfile.userName);
     }
-    Food.find(function(err,food){
+    Food.find({"user.userName":mainProfile.userName},function(err,food){
       if(err){
         console.log(err);
       }else{
@@ -169,34 +145,33 @@ app.post("/calories/:unamed/delete",function(req,res){
   });
 
 });
-app.post("/calories/:unamep",function(req,res){
+app.post("/calories/:unamep", function (req, res) {
   // console.log(mainProfile);
   const food = new Food({
     user: mainProfile,
     food: req.body.addFood,
     serving: req.body.addServing,
     calorie: req.body.addCalorie,
-});
-food.save(function(err,result){
-  if (err){
+  });
+  food.save(function (err, result) {
+    if (err) {
       console.log(err);
-  }
-  else{
-    res.redirect("/calories/"+req.params.unamep);
+    } else {
+      res.redirect("/calories/" + req.params.unamep);
       // console.log(result)
-  }
-});  // console.log(req.body);
-Food.find(function(err,food){
-  if(err){
-    console.log(err);
-  }else{
-    nutritionProfile=food;
-    pnPlen=nutritionProfile.length;
+    }
+  }); // console.log(req.body);
+  Food.find({"user.userName":mainProfile.userName}, function (err, food) {
+    if (err) {
+      console.log(err);
+    } else {
+      nutritionProfile = food;
+      
+      pnPlen = nutritionProfile.length;
 
-    // console.log(nutritionProfile);
-  }
-});
-  
+      // console.log(nutritionProfile);
+    }
+  });
 });
 
 
@@ -206,6 +181,7 @@ app.get("/exercise", function (req, res) {
 
 app.get("/login",function(req,res){
   
+mainProfile={};
 
   res.render("login");
 });
@@ -218,15 +194,15 @@ app.post("/login",function(req,res){
       console.log(err);
       else{
         if(persons.length>0){
-            console.log("This will be taken to new Page!")
-            res.redirect("/"+testName);
+          mainProfile=persons[0];
+            // console.log(mainProfile);
+            res.redirect("/calories/"+testName);
         }else{
           console.log("No user found");
           res.redirect("/");
         }
       }
   });
- 
   
 });
 
@@ -243,10 +219,7 @@ app.post("/signup",function(req,res){
   res.redirect("/login");
 });
 
-app.get("/:uId",function(req,res){
-    // console.log(req.params);
-    res.redirect("/calories/"+req.params.uId);
-});
+
 
 
 app.listen(process.env.PORT || 3000, function () {
