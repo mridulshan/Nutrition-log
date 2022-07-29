@@ -89,10 +89,30 @@
       </p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Search food..." name="postSearch" aria-label="Recipient's username" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary btnclor" type="post">Search</button>
-  </div>
+  <!-- <form action="/apicall" method="post">
+      <input type="search" onchange="post.this.form()" placeholder="Search food..." name="postSearch">
+      <div class="input-group-append">
+      </div>
+  </form> -->
+  <form action="/apicall" method="post">
+    <div class="p-2 dropdown listBox" >
+      <input class="form-control dropdown-toggle " type="search" data-bs-toggle="dropdown" autocomplete="none" aria-expanded="false" name="postSearch"
+        placeholder="Try typing something">
+      </input><ul class="" id="openIt">
+        <% if(rStoreApi.length>6){%>
+        <% rStoreApi.length=6}%>
+      <% for(var i=0;i<rStoreApi.length;i++){%>
+      
+        <li>
+          <p class="mb-1 dropdown-item" href="#"> <strong>
+            <%= rStoreApi[i].item_name + ", " + rStoreApi[i].brand_name +", Calories: "+  rStoreApi[i].nf_calories +"kcal"%>
+          </strong></p>
+        </li>
+      
+      <% };%>
+    </ul>
+    </div>
+  </form>
 </div>
       </div>
     </div>
@@ -105,6 +125,7 @@
     This is a Preview please login
   </h2>
 </div>
+
 
  <!-- Preview log -->
 <div class="d-flex justify-content-center">
