@@ -214,7 +214,7 @@ app.post("/signup",function(req,res){
 
 app.post("/apicall",function(req,res){
 
-  const url ="https://api.nutritionix.com/v1_1/search/"+req.body.postSearch+"?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=dc210fd5&appKey=0fc21a0f999dee329579e3854194acd5";
+  const url ="https://api.nutritionix.com/v1_1/search/"+req.body.postSearch+"?results=0:20&fields=item_name,brand_name,item_id,nf_protein,nf_calories&appId=dc210fd5&appKey=0fc21a0f999dee329579e3854194acd5";
     https.get(url, function (response) {
     console.log("Response status code="+response.statusCode);
     response.on("data", function (data) {
