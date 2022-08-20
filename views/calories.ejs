@@ -217,9 +217,9 @@
             <td><%= recievedFromApp[i].postCal %> </td>
             <td >
               <form action="/calories" method="post">
-                <button type="submit" class="addMinus" name="svg" value="<%= i+1 %>"  ><svg class="addMinus" style="width:24px;height:24px" viewBox="0 0 24 24" >
-                <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-              </svg></button>
+                <button class="addMinus" name="svg" value="<%= i+10 %>"  >
+                  X
+                </button>
                 
               </form>
             </td>
@@ -301,13 +301,13 @@
   </div>
 
   <div>
-    <h1 class="display-5 fw-bold lh-1 mb-3">
+    <h1 class="display-5 fw-bold lh-1 ">
       Machine Learning Model
     </h1>
     <ul class="flex-column my-5">
       <button class="textPut w-auto m-1" id="enableCam">Enable Webcam</button>
       <% for(var i=0;i<len;i++){ %>
-        <button class="textPut dataCollector w-auto m-1" data-1hot="<%=i%>" data-name="Class <%=i+1%>">
+        <button class="textPut dataCollector w-auto m-1" data-1hot="<%=i%>" data-name="<%= recievedFromApp[i].postFood %>">
           <%= recievedFromApp[i].postFood %>
         </button>
 

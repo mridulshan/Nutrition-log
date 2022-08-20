@@ -126,7 +126,7 @@ function dataGatherLoop() {
 
     STATUS.innerText = '';
     for (let n = 0; n < CLASS_NAMES.length; n++) {
-      STATUS.innerText += CLASS_NAMES[n] + ' data count: ' + examplesCount[n] + '. ';
+      STATUS.innerText += CLASS_NAMES[n] + ' data count: ' + examplesCount[n] + '.    ';
     }
     window.requestAnimationFrame(dataGatherLoop);
   }

@@ -84,7 +84,7 @@ app.post("/calories", function (req, res){
   // console.log(arrays.length);
 
  
-  if(req.body.svg){
+  if(req.body.svg && !req.body.postFood){
     for(var i=req.body.svg-1;i<arrayLen-1;i++){
       arrays[i]=arrays[i+1];
     }
