@@ -36,7 +36,7 @@ async function getText(file) {
       let nodelink = document.createElement('a');
       node.appendChild(nodelink);
       node.onclick='fun2';
-      nodelink.innerText=(data.hits[i].fields.item_name);
+      nodelink.innerText=(data.hits[i].fields.item_name +" "+" " + data.hits[i].fields.nf_calories+ "cal.");
       nodelink.href='#previewLog';
       apiout.appendChild(node);
     }
