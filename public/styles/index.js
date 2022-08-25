@@ -7,6 +7,47 @@ const MOBILE_NET_INPUT_WIDTH = 224;
 const MOBILE_NET_INPUT_HEIGHT = 224;
 const STOP_DATA_GATHER = -1;
 const CLASS_NAMES = [];
+const apiout = document.getElementById('apiF');
+const apiin= document.getElementById('apibox');
+let link1 = "https://api.nutritionix.com/v1_1/search/";
+let link2= "?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=dc210fd5&appKey=0fc21a0f999dee329579e3854194acd5";
+
+
+apiin.addEventListener('input',fun);
+apiout.addEventListener('click',fun2);
+function fun2 (){
+  alert("clicked");
+}
+function fun(){
+  apiout.innerText="loading...";
+  let link=(link1+(apiin.value)+link2);
+  getText(link);
+}
+async function getText(file) {
+   await fetch(file)
+  .then(res => res.json()) // the .json() method parses the JSON response into a JS object literal
+  .then(data => {
+    // alert("in side data");
+    apiout.innerText=null;
+    if(data.hits.length>5){data.hits.length=5;}
+    for(let i=0;i<data.hits.length;i++){
+
+      let node = document.createElement('li');
+      let nodelink = document.createElement('a');
+      node.appendChild(nodelink);
+      node.onclick='fun2';
+      nodelink.innerText=(data.hits[i].fields.item_name);
+      nodelink.href='#previewLog';
+      apiout.appendChild(node);
+    }
+  
+    // apiout.innerHTML=;
+    // for(let i =0;i<data.hits.length ;i++){
+    // }
+  });
+}
+
+
 
 ENABLE_CAM_BUTTON.addEventListener('click', enableCam);
 TRAIN_BUTTON.addEventListener('click', trainAndPredict);

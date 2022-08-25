@@ -94,42 +94,18 @@
       <div class="input-group-append">
       </div>
   </form> -->
-  <form action="/apicall" method="post">
-    <div class="p-2 dropdown listBox" >
-      <input class="form-control dropdown-toggle " oninput="this.form.submit()"  type="search" data-bs-toggle="modal"  autocomplete="none" aria-expanded="false" name="postSearch"
+  <form style="width:522px; height:198px;">
+    <div class="p-2 dropdown listBox "  >
+      <input id="apibox" class="form-control "  type="search"  autocomplete="none" aria-expanded="false" name="postSearch"
         placeholder="Try typing something">
       </input>
-      <div class="dropdown-menu" id="openIt" tabindex="-1" aria-labelledby="openIt" aria-hidden="false">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" >Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <ul class="" >
-              <% if(rStoreApi.length>6){%>
-              <% rStoreApi.length=6}%>
-            <% for(var i=0;i<rStoreApi.length;i++){%>
-            
-              <li>
-                 <strong><p class="mb-1 dropdown-item" href="#">
-                  <%= rStoreApi[i].item_name + ", " + rStoreApi[i].brand_name  %>
-                </strong>
-               <%=  "Calories: "+  rStoreApi[i].nf_calories +"kcal" + " Protein: " + rStoreApi[i].nf_protein %></p>
-              </li>
-            
-            <% };%>
-          </ul>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
       
     </div>
+    <strong id="apiF">
+
+    </strong>
   </form>
+
 </div>
       </div>
     </div>
@@ -314,7 +290,8 @@
         <% }; %>
           <button class="textPut w-auto m-1" id="train">Train &amp; Predict!</button>
           <button class="textPut w-auto m-1" id="reset">Reset</button>
-          <p>Press and Hold button to capture samples of item!</p>
+          <p>Add food Items in preview log, which you want to train 
+          <br>Press and Hold button to capture samples of item</p>
     </ul>
   </div>
 
