@@ -8,19 +8,60 @@ const MOBILE_NET_INPUT_HEIGHT = 224;
 const STOP_DATA_GATHER = -1;
 const CLASS_NAMES = [];
 const apiout = document.getElementById('apiF');
+const resultout = document.getElementById('apiF2');
 const apiin= document.getElementById('apibox');
+var FoodArr=[];
 let link1 = "https://api.nutritionix.com/v1_1/search/";
-let link2= "?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=dc210fd5&appKey=0fc21a0f999dee329579e3854194acd5";
-
+let link2= "?results=0:20&fields=item_name,brand_name,item_id,nf_saturated_fat,nf_protein,nf_total_carbohydrate,nf_total_fat,nf_calories&appId=dc210fd5&appKey=0fc21a0f999dee329579e3854194acd5";
+let tempFoodArr=[];
+let tempFoodObj={
+  name:'',
+  serving:'',
+  serving_id:'',
+  calories:'',
+  protein:'',
+  carbs:'',
+  fats:'',
+  fats_sat:'',
+  id:''
+}
 
 apiin.addEventListener('input',fun);
 apiout.addEventListener('click',fun2);
-function fun2 (){
-  alert("clicked");
+function fun2 (clicked_id){
+  // apiout.innerHTML=clicked_id.path[1].innerText;
+  // tempFoodArr.push(clicked_id.path[1].innerText);
+  let pressed_index=clicked_id.path[1].id;
+  FoodArr.push(tempFoodArr[pressed_index]);
+  console.log(FoodArr);
+  tempFoodArr=[];
+  apiout.innerText="";
+  apiin.value="";
+  resultout.innerText="";
+  for(let i=0;i<FoodArr.length;i++){
+      let node = document.createElement('li');
+      let nodelink = document.createElement('a');
+      node.appendChild(nodelink);
+      
+      nodelink.innerText=FoodArr[i].name + " "+ " Calories: " + FoodArr[i].calories+" "+ " Protein: "+ FoodArr[i].protein+"g";      
+      resultout.appendChild(node);
+  }
+
+}
+
+
+let button=document.getElementById('buttonId');
+button.addEventListener('click',key_check);
+
+function key_check(){
+  
+  const jsonObj=JSON.stringify(FoodArr);
+  alert(FoodArr.length+ " Items Added");
+  button.value=jsonObj;
 }
 function fun(){
   apiout.innerText="loading...";
-  let link=(link1+(apiin.value)+link2);
+  let link=(link1+(apiin.value)+"*"+link2);
   getText(link);
 }
 async function getText(file) {
@@ -30,20 +71,32 @@ async function getText(file) {
     // alert("in side data");
     apiout.innerText=null;
     if(data.hits.length>5){data.hits.length=5;}
+    tempFoodArr=[];
     for(let i=0;i<data.hits.length;i++){
-
+      tempFoodArr.push({
+        name:data.hits[i].fields.item_name,
+        serving:data.hits[i].fields.nf_serving_size_qty,
+        serving_id:data.hits[i].fields.nf_serving_size_unit,
+        calories:data.hits[i].fields.nf_calories,
+        protein:data.hits[i].fields.nf_protein,
+        carbs:data.hits[i].fields.nf_total_carbohydrate,
+        fats:data.hits[i].fields.nf_total_fat,
+        fats_sat:data.hits[i].fields.nf_saturated_fat,
+        id:data.hits[i].fields.item_id
+      });
+    
       let node = document.createElement('li');
       let nodelink = document.createElement('a');
       node.appendChild(nodelink);
-      node.onclick='fun2';
-      nodelink.innerText=(data.hits[i].fields.item_name +" "+" " + data.hits[i].fields.nf_calories+ "cal.");
-      nodelink.href='#previewLog';
+      nodelink.innerText=(tempFoodArr[i].name +" "+" " + tempFoodArr[i].calories+ "cal.");
+      node.id=i;
+      node.onclick='fun2(this.id)';
+      // apiin.name.postFood=data.hits[i].fields.item_id;
+      
       apiout.appendChild(node);
     }
   
-    // apiout.innerHTML=;
-    // for(let i =0;i<data.hits.length ;i++){
-    // }
+    
   });
 }
 
@@ -111,8 +164,14 @@ function predictLoop() {
       let prediction = model.predict(imageFeatures).squeeze();
       let highestIndex = prediction.argMax().arraySync();
       let predictionArray = prediction.arraySync();
+      let percent='';
+      if(Math.floor(predictionArray[highestIndex] * 100)>75){
+        percent='Prediction: ' + CLASS_NAMES[highestIndex] + ' with ' + Math.floor(predictionArray[highestIndex] * 100) + '% confidence';
+      }else{
+        percent =' Cant identify...'
+      }
 
-      STATUS.innerText = 'Prediction: ' + CLASS_NAMES[highestIndex] + ' with ' + Math.floor(predictionArray[highestIndex] * 100) + '% confidence';
+      STATUS.innerText = predict;
     });
 
     window.requestAnimationFrame(predictLoop);

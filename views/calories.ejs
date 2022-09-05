@@ -94,17 +94,7 @@
       <div class="input-group-append">
       </div>
   </form> -->
-  <form style="width:522px; height:198px;">
-    <div class="p-2 dropdown listBox "  >
-      <input id="apibox" class="form-control "  type="search"  autocomplete="none" aria-expanded="false" name="postSearch"
-        placeholder="Try typing something">
-      </input>
-      
-    </div>
-    <strong id="apiF">
-
-    </strong>
-  </form>
+  
 
 </div>
       </div>
@@ -118,6 +108,7 @@
     This is a Preview please login
   </h2>
 </div>
+
 
 
  <!-- Preview log -->
@@ -169,32 +160,65 @@
 
 
 <div id="previewLog">
-  <div class="container-fluid d-flex justify-content-center">
 
-    <div class=" d-flex ">
+  <div class="m-2 container-fluid d-flex flex-column justify-content-center">
+    
+    <div class="p-2  box" >
+      <h1 class="p-3 text-dark text-center">
+        Search food in Database: 
+      </h1>
+      <!-- style="width:522px; height:198px;" -->
+      <div style="width:900.307px ;" class="p-2 text-dark">
+        <form action="/apicall" method="post">
+        <div class="m-2  fs-4">
+          <ol id="apiF2"></ol>
+        </div>
+        <div class="m-2">
+          <input id="apibox" type="text" class="form-control bg-light"  autocomplete="none" aria-expanded="false"
+          name="postSearch" placeholder="Try typing something">
+        <div id="apiF" class="bg-light p-2" style="list-style: none;">
+    
+        </div>
+        </div>
+        
+        <div class="m-2">
+
+            <button name="testjson" type="submit" id="buttonId" class="btn btn-light bg-light" >
+              Save
+            </button>
+          </form>
+    
+    
+        </div>
+      </div>
+    </div>
+  
+
+
+    <div class=" p-2 box">
       <form action="/calories" method="post">
       <table class="table box">
         <thead>
           <tr >
-            <th scope="col" class="justify-content-center betwee">Serial No:</th>
-            <th scope="col" class="justify-content-center">Food: </th>
-            <th scope="col"class="justify-content-center">Serving size:</th>
-            <th scope="col" class="justify-content-center">Calories</th>
-            <th scope="col"class="justify-content-center">Item:</th>
+            <th scope="col" class="text-center justify-content-center betwee">Serial No</th>
+            <th scope="col" class="text-center justify-content-center">Food </th>
+            <th scope="col"class="text-center justify-content-center">Serving size</th>
+            <th scope="col" class="text-center justify-content-center">Calories</th>
+            <th scope="col"class="text-center justify-content-center">Remove</th>
           </tr>
         </thead>
         <tbody>
         
           <% for(var i=0;i<len;i++){ %>
           <tr>
-            <th scope="row"><%=i+1%>.</th>
-            <td><%= recievedFromApp[i].postFood %> </td>
-            <td><%= recievedFromApp[i].postServ %> </td>
-            <td><%= recievedFromApp[i].postCal %> </td>
-            <td >
-              <form action="/calories" method="post">
-                <button class="addMinus" name="svg" value="<%= i+10 %>"  >
-                  X
+            <th  scope="row"><%=i+1%>.</th>
+            <td><%= recievedFromApp[i].name %> </td>
+            <td class="text-center"><%= recievedFromApp[i].serving %> </td>
+            <td class="text-center"><%= recievedFromApp[i].calories %> </td>
+            <td class="text-center">
+              <form action="/calories" method="post" >
+                <button type="menu" class="btn-light btn" name="svg" value="<%= i+10 %>"  >
+                 -
                 </button>
                 
               </form>
@@ -208,7 +232,8 @@
             </th>
             <td>
               <div class="">
-                <input type="search" class="form-control" title="Food" name="postFood" spellcheck="false"
+                
+                <input type="search" class="form-control" title="Food" name="name" spellcheck="false"
                   aria-autocomplete="none" autocomplete="none">
                 </input>
                 
@@ -216,7 +241,7 @@
             </td>
             <td>
               <div class="">
-                <input type="search" class="form-control" title="Food" name="postServ" spellcheck="false"
+                <input type="search" class="form-control" title="Food" name="serving" spellcheck="false"
                   aria-autocomplete="none" autocomplete="none">
                 </input>
                 
@@ -225,14 +250,14 @@
             
             <td>
               <div class="">
-                <input type="search" class="form-control" title="enter serving size of food" name="postCal" spellcheck="false" aria-autocomplete="none" autocomplete="none">
+                <input type="search" class="form-control" title="enter serving size of food" name="calories" spellcheck="false" aria-autocomplete="none" autocomplete="none">
                 </input>
 
               </div>
 
             </td>
            <td>
-            <button class="form-control btn">Add me</button>
+            <button class="bg-light form-control btn">Add me</button>
            </td>
           </tr>
         </tbody>
@@ -283,8 +308,8 @@
     <ul class="flex-column my-5">
       <button class="textPut w-auto m-1" id="enableCam">Enable Webcam</button>
       <% for(var i=0;i<len;i++){ %>
-        <button class="textPut dataCollector w-auto m-1" data-1hot="<%=i%>" data-name="<%= recievedFromApp[i].postFood %>">
-          <%= recievedFromApp[i].postFood %>
+        <button class="textPut dataCollector w-auto m-1" data-1hot="<%=i%>" data-name="<%= recievedFromApp[i].name %>">
+          <%= recievedFromApp[i].name %>
         </button>
 
         <% }; %>

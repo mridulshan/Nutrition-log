@@ -39,6 +39,8 @@ a{
 .btnclor:hover{
     background-color: #B3541E;   
     border-radius:8px;
+    
+
 
 }
 .textPut{
@@ -93,7 +95,6 @@ a{
 }
 .addMinus:hover{
     color: #B3541E;
-    padding: 0%;
 }
 .footr{
     fill: #FFCCD2;

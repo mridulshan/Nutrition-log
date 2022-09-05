@@ -1,4 +1,5 @@
 {
+  
   "dependencies": {
     "body-parser": "^1.19.1",
     "ejs": "^3.1.6",
@@ -6,6 +7,7 @@
     "mongoose": "^6.4.6",
     "nutritionix-api": "^1.0.4"
   },
+
   "name": "nutrition-log",
   "version": "1.0.0",
   "main": "app.js",
@@ -18,4 +20,5 @@
     "node":"16.13.1"
   },
   "description": ""
+  
 }

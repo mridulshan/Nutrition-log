@@ -16,7 +16,8 @@ var pnPlen=0;
 const mongoose = require('mongoose');
 const { prependListener } = require("process");
 const { parentPort } = require("worker_threads");
-mongoose.connect('mongodb+srv://admin-mridul:013611sc@cluster0.j9ukryr.mongodb.net/peopleDb');
+mongoose.connect('mongodb://localhost:27017/peopleDb');
+// mongoose.connect('mongodb+srv://admin-mridul:013611sc@cluster0.j9ukryr.mongodb.net/peopleDb');
 //user
 const userSchema = new mongoose.Schema({
   name: {
@@ -78,20 +79,19 @@ app.get("/calories", function (req, res) {
 app.post("/calories", function (req, res){
   var arrayLen =arrays.length;
   arrFromSearch=req.body;
-  if(req.body.postFood){
+  if(req.body.name){
   arrays.push(arrFromSearch);
   };
   // console.log(arrays.length);
 
- 
-  if(req.body.svg && !req.body.postFood){
-    for(var i=req.body.svg-1;i<arrayLen-1;i++){
+ console.log(req.body.svg);
+  if(req.body.svg && !req.body.name){
+    for(var i=req.body.svg-10;i<arrayLen-1;i++){
       arrays[i]=arrays[i+1];
     }
     arrays.pop();   
   }
 
-  console.log(req.body);
     res.redirect("/calories#previewLog");
 });
 
@@ -131,7 +131,7 @@ app.post("/calories/:unamed/delete",function(req,res){
       }else{
         nutritionProfile=food;
         pnPlen=nutritionProfile.length;
-    
+        
         // console.log(nutritionProfile);
       }
     });
@@ -159,9 +159,7 @@ app.post("/calories/:unamep", function (req, res) {
       console.log(err);
     } else {
       nutritionProfile = food;
-      
       pnPlen = nutritionProfile.length;
-
       // console.log(nutritionProfile);
     }
   });
@@ -213,20 +211,16 @@ app.post("/signup",function(req,res){
 });
 
 app.post("/apicall",function(req,res){
+  let items= req.body.testjson;
+  let FoodArray = JSON.parse(items);
+  FoodArray.forEach(element => {
+    element.serving=element.serving+" "+element.serving_id;
+    arrays.push(element);
 
-  const url ="https://api.nutritionix.com/v1_1/search/"+req.body.postSearch+"?results=0:20&fields=item_name,brand_name,item_id,nf_protein,nf_calories&appId=dc210fd5&appKey=0fc21a0f999dee329579e3854194acd5";
-    https.get(url, function (response) {
-    console.log("Response status code="+response.statusCode);
-    response.on("data", function (data) {
-       obj = JSON.parse(data);
-      
-       obj.hits.forEach(element => {
-        storeApi.push(element.fields);
-       });
-       console.log(storeApi);
-       res.redirect("/calories/#openIt");
-    });
   });
+  
+  res.redirect("/calories/#openIt");
+  
 });
 
 
