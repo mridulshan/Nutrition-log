@@ -87,16 +87,22 @@
         You can use this page to log your calories and other fun stuff this will
         be also updated soon stay tuned :)).
       </p>
+      <p class="">
+        Use the below Search bar to search item through an API. Add as many items as required then Click on save to add it in List. The list itself can be editited using the remove button.
+      </p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <div class="input-group mb-3">
-  <!-- <form action="/apicall" method="post">
-      <input type="search" onchange="post.this.form()" placeholder="Search food..." name="postSearch">
-      <div class="input-group-append">
-      </div>
-  </form> -->
-  
+        <!-- <div class="input-group mb-3">
+ 
+  <form style="width:522px; height:198px;">
+    <div class="p-2 dropdown listBox ">
+      <input id="apibox" class="form-control " type="search" autocomplete="none" aria-expanded="false" name="postSearch" placeholder="Try typing something">
+      
+      
+    </div>
+    <strong id="apiF"><li><a href="#previewLog">Bananas, raw - 1 medium (7" to 7-7/8" long)  105.02cal.</a></li><li><a href="#previewLog">Bananas, raw - 1 small (6" to 6-7/8" long)  89.89cal.</a></li><li><a href="#previewLog">Bananas, raw - 1 NLEA serving  112.14cal.</a></li><li><a href="#previewLog">Bananas, raw - 1 extra small (less than 6" long)  72.09cal.</a></li><li><a href="#previewLog">Bananas, raw - 1 cup, mashed  200.25cal.</a></li></strong>
+  </form>
 
-</div>
+</div> -->
       </div>
     </div>
   </div>
@@ -158,7 +164,6 @@
 
 
 
-
 <div id="previewLog">
 
   <div class="m-2 container-fluid d-flex flex-column justify-content-center">
@@ -168,7 +173,7 @@
         Search food in Database: 
       </h1>
       <!-- style="width:522px; height:198px;" -->
-      <div style="width:900.307px ;" class="p-2 text-dark">
+      <div style="width:1059.910px ;" class="p-2 text-dark">
         <form action="/apicall" method="post">
         <div class="m-2  fs-4">
           <ol id="apiF2"></ol>
@@ -203,7 +208,8 @@
             <th scope="col" class="text-center justify-content-center betwee">Serial No</th>
             <th scope="col" class="text-center justify-content-center">Food </th>
             <th scope="col"class="text-center justify-content-center">Serving size</th>
-            <th scope="col" class="text-center justify-content-center">Calories</th>
+            <th scope="col" class="text-center justify-content-center">Calories (P, C, F)</th>
+            <th scope="col" class="text-center justify-content-center">Date</th>
             <th scope="col"class="text-center justify-content-center">Remove</th>
           </tr>
         </thead>
@@ -211,10 +217,11 @@
         
           <% for(var i=0;i<len;i++){ %>
           <tr>
-            <th  scope="row"><%=i+1%>.</th>
-            <td><%= recievedFromApp[i].name %> </td>
+            <th class="text-center"  scope="row"><%=i+1%>.</th>
+            <td class=""><%= recievedFromApp[i].name %> </td>
             <td class="text-center"><%= recievedFromApp[i].serving %> </td>
             <td class="text-center"><%= recievedFromApp[i].calories %> </td>
+            <td class="text-center"><%= recievedFromApp[i].date %> </td>
             <td class="text-center">
               <form action="/calories" method="post" >
                 <button type="menu" class="btn-light btn" name="svg" value="<%= i+10 %>"  >
@@ -226,7 +233,7 @@
           </tr>
           <% };  %>
           <tr>
-            <th scope="row">
+            <th class="text-center" scope="row">
               <!-- <input type="text" class="form-control" title="enter s.no of food" name="postSno"> -->
               <%= i+1%>.  
             </th>
@@ -241,7 +248,7 @@
             </td>
             <td>
               <div class="">
-                <input type="search" class="form-control" title="Food" name="serving" spellcheck="false"
+                <input type="number" class="form-control" title="Food" name="serving" spellcheck="false"
                   aria-autocomplete="none" autocomplete="none">
                 </input>
                 
@@ -250,7 +257,15 @@
             
             <td>
               <div class="">
-                <input type="search" class="form-control" title="enter serving size of food" name="calories" spellcheck="false" aria-autocomplete="none" autocomplete="none">
+                <input type="number" class="form-control" title="enter serving size of food" name="calories" spellcheck="false" aria-autocomplete="none" autocomplete="none">
+                </input>
+
+              </div>
+
+            </td>
+            <td>
+              <div class="">
+                <input type="date" class="form-control" title="date" name="date" spellcheck="false" aria-autocomplete="none" autocomplete="none">
                 </input>
 
               </div>
@@ -274,7 +289,7 @@
 
 
 
-  <div class="container-fluid d-flex justify-content-center">
+  <!-- <div class="container-fluid d-flex justify-content-center">
 
     <div class=" d-flex ">
       <table class="table box">
@@ -291,12 +306,12 @@
       
       
     </div>
-  </div>
+  </div> -->
 
     
   </div>
   
-<div class="d-flex flex-column mb-3 justify-content-center text-center">
+<!-- <div class="d-flex flex-column mb-3 justify-content-center text-center">
   <div class="p-2">
     <p class="mx-auto" id="status">Awaiting TF.js load</p>
   </div>
@@ -330,7 +345,7 @@
 
     <!-- Import the page's JavaScript to do some stuff -->
     <script type="module" src="/styles/index.js"></script>
-
+ -->
 
 
 

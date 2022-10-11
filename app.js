@@ -16,8 +16,8 @@ var pnPlen=0;
 const mongoose = require('mongoose');
 const { prependListener } = require("process");
 const { parentPort } = require("worker_threads");
-mongoose.connect('mongodb://localhost:27017/peopleDb');
-// mongoose.connect('mongodb+srv://admin-mridul:013611sc@cluster0.j9ukryr.mongodb.net/peopleDb');
+// mongoose.connect('mongodb://localhost:27017/peopleDb');
+mongoose.connect('mongodb+srv://admin-mridul:013611sc@cluster0.j9ukryr.mongodb.net/peopleDb');
 //user
 const userSchema = new mongoose.Schema({
   name: {
@@ -166,8 +166,8 @@ app.post("/calories/:unamep", function (req, res) {
 });
 
 
-app.get("/exercise", function (req, res) {
-  res.render("exercise");
+app.get("/info", function (req, res) {
+  res.render("info");
 });
 
 app.get("/login",function(req,res){
@@ -215,6 +215,7 @@ app.post("/apicall",function(req,res){
   let FoodArray = JSON.parse(items);
   FoodArray.forEach(element => {
     element.serving=element.serving+" "+element.serving_id;
+    element.calories=element.calories+" ("+element.protein+', '+element.carbs+', '+element.fats+')';
     arrays.push(element);
 
   });
