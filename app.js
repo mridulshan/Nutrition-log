@@ -220,7 +220,7 @@ app.post("/apicall",function(req,res){
 
   });
   
-  res.redirect("/calories/#openIt");
+  res.redirect("/calories/#previewLog");
   
 });
 

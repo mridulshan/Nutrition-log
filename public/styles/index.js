@@ -215,6 +215,28 @@ async function getText() {
   // });
 }
 
+google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawVisualization);
+
+    function drawVisualization() {
+      // Some raw data (not necessarily accurate)
+      var data = google.visualization.arrayToDataTable([
+        ['Month', 'Calories', 'Protein',   'Carbs',           'Fats'],
+        
+        ['2008/09',  136,      691,         629,             1026 ]
+      ]);
+
+      var options = {
+        title : 'Calories Breakdown: ',
+        vAxis: {title: 'Calories'},
+        hAxis: {title: 'Meals'},
+        seriesType: 'bars',
+        series: {5: {type: 'line'}}
+      };
+
+      var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
 
 
 // ENABLE_CAM_BUTTON.addEventListener('click', enableCam);
